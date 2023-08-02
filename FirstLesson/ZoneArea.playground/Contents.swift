@@ -10,41 +10,46 @@
 //В итоге нужно распечатывает кто победил, либо бойцы зоны 51 (Если хотя бы 1 боец выжил), либо атакующие и на какой волне.
 //Все значения полей, правила битвы и остальное на вашу фантазию.
 //
-
 import UIKit
 
 
 struct Power {
-    var damage: Int = 10
-    var health: Int = 100
-    var protection: Int = 10
-    var agility: Int = 10
+    fileprivate var  damage: Int = 10
+    fileprivate var  health: Int = 100
+    fileprivate var protection: Int = 10
+    fileprivate var agility: Int = 10
 }
 
 class Unit {
-    var nickname: String = "Unit"
-    var power = Power()
-    var count: Int = 0
-    var description: String{
+    fileprivate var nickname: String
+    fileprivate var power = Power()
+    fileprivate var count: Int = 0
+    fileprivate var description: String{
         return "\(nickname)|\(power)"
     }
     var sum_damage: Int {
         return self.power.damage * self.power.agility
     }
+    init(nickname: String, power: Power) {
+        self.nickname = "Unit"
+        self.power = Power()
+    }
+
     
 }
 
 class Warrior51: Unit {
-    override init() {
-        super.init()
+    override init(nickname: String, power: Power) {
+        super.init(nickname: nickname, power: power)
         self.nickname = "Warrior 51"
         self.power = Power(damage: 100, health: 200, protection: 100, agility: 100)
+        
     }
 }
 
 class AnimeWatcher: Unit {
-    override init() {
-        super.init()
+    override init(nickname: String, power: Power) {
+        super.init(nickname: nickname, power: power)
         self.nickname = "AnimeWatcher"
         self.power = Power(damage: 10, health: 100, protection: 50, agility: 10)
     }
@@ -52,28 +57,26 @@ class AnimeWatcher: Unit {
 }
 
 class Djedai: Unit {
-    override init() {
-        super.init()
+    override init(nickname: String, power: Power) {
+        super.init(nickname: nickname, power: power)
         self.nickname = "Djedai"
         self.power = Power(damage: 500, health: 200, protection: 100, agility: 200)
     }
 }
 
 class ChuckNoris: Unit {
-    override init() {
-        super.init()
+    override init(nickname: String, power: Power) {
+        super.init(nickname: nickname, power: power)
         self.nickname = "Noriiis"
         self.power = Power(damage: 200, health: 500, protection: 100, agility: 300)
     }
 }
 
 class ZoneArea {
-    var anime = AnimeWatcher()
-    var djedai = Djedai()
-    var noris = ChuckNoris()
-    var warrior51 = Warrior51()
-    var withAttackers: [Unit] = []
-    
+    private var anime = AnimeWatcher(nickname: "AnimeWatcher", power: Power(damage: 10, health: 100, protection: 50, agility: 10))
+    private var djedai = Djedai(nickname: "Djedai", power: Power(damage: 500, health: 200, protection: 100, agility: 200))
+    private var noris = ChuckNoris(nickname: "Noriiis", power: Power(damage: 200, health: 500, protection: 100, agility: 300))
+    private var warrior51 = Warrior51(nickname: "Warrior 51", power: Power(damage: 100, health: 200, protection: 100, agility: 100))
     func beginBattle(anime: Int, djedai: Int, noris: Int, guardians: Int, wave: Int ) -> String {
         self.anime.count = anime
         self.djedai.count = djedai
@@ -90,17 +93,15 @@ class ZoneArea {
             if value == 1 {
                 coeficient = 1
             }
-            attackersSumAttack = attackersSumAttack * coeficient
-            attackersSumHealth = attackersSumHealth * coeficient
+            attackersSumAttack *= coeficient
+            attackersSumHealth *= coeficient
             while guardiansSumHealth > 0 || attackersSumHealth > 0 {
-                guardiansSumHealth = guardiansSumHealth - attackersSumAttack
+                guardiansSumHealth -= attackersSumAttack
                 attackersSumHealth -= guardiansSumAttack
             }
-            print(guardiansSumHealth)
-            print(attackersSumHealth)
-            print(value)
-            
-            
+//            print(guardiansSumHealth)
+//            print(attackersSumHealth)
+//            print(value)
             if value == wave {
                 if guardiansSumHealth < attackersSumHealth {
                     return "attackers are win"
@@ -111,11 +112,11 @@ class ZoneArea {
             }
             
         }
-        return ""
+        return "Error"
     }
 }
 
 var zoneArea = ZoneArea()
-zoneArea.beginBattle(anime: 10, djedai: 20, noris: 2, guardians: 100, wave: 3)
+zoneArea.beginBattle(anime: 10, djedai: 20, noris: 2, guardians: 1000, wave: 3)
 
 
