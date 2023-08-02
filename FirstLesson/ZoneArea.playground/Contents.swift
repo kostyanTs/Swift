@@ -116,7 +116,7 @@ class ZoneArea {
     }
 }
 
-var zoneArea = ZoneArea()
+let zoneArea = ZoneArea()
 zoneArea.beginBattle(anime: 10, djedai: 20, noris: 2, guardians: 1000, wave: 3)
 
 
