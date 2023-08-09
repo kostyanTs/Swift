@@ -10,16 +10,12 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var PersonalImageView: UIImageView!
-    
     @IBOutlet weak var PersonalContainerView: UIView!
-    
     @IBOutlet weak var ContainerView2: UIView!
     @IBOutlet weak var ContainerView3: UIView!
     @IBOutlet weak var ButtonPush: UIButton!
     
-    
     @IBOutlet weak var ButtonRersonalInfoView: UIButton!
-    
     
     @IBOutlet weak var TabBar: UITabBar!
     
@@ -27,22 +23,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var CommentTextView: UITextView!
     
-   
     @IBOutlet weak var PersonalInfoTextView: UITextView!
     
-   
-    
-    let fullName = "Alexey Ivanov"
-    let comment = ":)))"
-    
-    let mainBackgroundColor: UIColor = UIColor(red: 0.28, green: 0.30, blue: 0.28, alpha: 0.28)
-    let buttonPushColor: UIColor = UIColor(red: 0.123, green: 0.135, blue: 0.123, alpha: 0.123)
-    
+    private let fullName = "Alexey Ivanov"
+    private let comment = ":)))"
+    private let mainBackgroundColor: UIColor = UIColor(red: 0.28, green: 0.30, blue: 0.28, alpha: 0.28)
+    private let buttonPushColor: UIColor = UIColor(red: 0.123, green: 0.135, blue: 0.123, alpha: 0.123)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         configurateView(PersonalContainerView)
 //        configurateView(ContainerView2)
         configurateView(ContainerView3)
@@ -53,6 +42,7 @@ class ViewController: UIViewController {
         configurateCommentView(CommentTextView)
         configurateInfoTextView(PersonalInfoTextView)
 //        configurateButtonPersonalInfoView(ButtonRersonalInfoView)
+        
     }
     
     func configurateTextNameView(_ view: UITextView) {
@@ -77,11 +67,11 @@ class ViewController: UIViewController {
         
     }
     
-        func configurateButtonPersonalInfoView(_ view: UIButton) {
-            view.layer.backgroundColor = UIColor.black.cgColor
+    func configurateButtonPersonalInfoView(_ view: UIButton) {
+        view.layer.backgroundColor = UIColor.black.cgColor
 
             
-        }
+    }
     
     func configurateTapBar(_ view: UITabBar) {
         view.layer.backgroundColor = mainBackgroundColor.cgColor
